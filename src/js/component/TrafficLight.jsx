@@ -22,7 +22,7 @@ export default function TrafficLight(){
 
     function cycle(){
         let count = 0
-        setInterval(() => {
+        globalThis.cycleStart = setInterval(() => {
             if(count !== 3){
                 str = colors[count]
                 setLight(str)
@@ -35,6 +35,13 @@ export default function TrafficLight(){
         }, 1000);
     }
 
+    function stop(){
+        str = ""
+        setLight(str)
+        clearInterval(cycleStart)
+    }
+
+
 
     
     return(
@@ -46,6 +53,7 @@ export default function TrafficLight(){
             <div onClick={showLightYellow} className={"yellow-light" + (color === "yellow"? "-glow":"")}></div>
             <div onClick={showLightGreen} className={"green-light" + (color === "green"? "-glow":"")}></div>
             <button onClick={cycle}>Click Me</button>
+            <button onClick={stop}>Stop</button>
 
         </div>
         </>
